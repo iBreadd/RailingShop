@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добави Поръчка</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Преглед на Поръчката</h1>
+    <div th:if="${message}">
+        <div class="alert alert-warning" th:text="${message}"></div>
+    </div>
+    <h2>Потребител</h2>
+    <p th:text="'Потребител: ' + ${user.username}"></p>
+
+    <h2>Продукти в Количката</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Продукт</th>
+            <th>Количество</th>
+            <th>Цена</th>
+            <th>Обща Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderProduct : ${cartItems}">
+            <td th:text="${orderProduct.product.name}"></td>
+            <td th:text="${orderProduct.quantity}"></td>
+            <td th:text="${orderProduct.product.price}"></td>
+            <td th:text="${orderProduct.product.price.multiply(new java.math.BigDecimal(orderProduct.quantity))}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h3 th:text="'Обща Цена: ' + ${cart.totalPrice}"></h3>
+
+    <form th:action="@{/order/addOrder}" method="post">
+        <button type="submit" class="btn btn-primary">Потвърди Поръчката</button>
+    </form>
+    <a href="/cart" class="btn btn-secondary">Назад към Количката</a>
+</div>
+</body>
+</html>

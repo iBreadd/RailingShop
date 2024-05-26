@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Information</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body class="bg-dark">
+<div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">User Information</h3>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/shop/updateAddress}" method="post" th:object="${user}">
+                        <input type="hidden" th:field="*{id}">
+                        <div>
+                            <p style="color: red" th:text="${error}"></p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" readonly class="form-control" id="firstName" name="firstName"
+                                   placeholder="Enter your first name" th:required="true" th:value="*{firstName}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" readonly class="form-control" id="lastName" name="lastName"
+                                   placeholder="Enter your last name" th:required="true" th:value="*{lastName}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" readonly class="form-control" id="email" name="email"
+                                   placeholder="Enter your email" th:required="true" th:value="*{email}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="address" class="form-control" id="address" name="address"
+                                   placeholder="Enter your address" th:required="true" th:value="*{address}">
+                            <div th:if="${#fields.hasErrors('address')}"><span th:errors="*{address}"
+                                                                               class="text-danger"></span></div>
+                        </div>
+                        <!--<div class="mb-3">-->
+                        <!--    <label for="password" type="hidden" class="form-label"></label>-->
+                        <!--    <input type="hidden" class="form-control" id="password" name="password"-->
+                        <!--           placeholder="Enter your password" th:required="true" th:field="*{password}">-->
+                        <!--                            <div th:if="${#fields.hasErrors('password')}"><span th:errors="*{password}" class="text-danger"></span></div>-->
+
+                        <!--</div>-->
+                        <button type="submit" class="btn btn-warning mr-2" name="submit">Редактирай</button>
+                        <!--                        <input type="button" value="Go back!" onclick="history.back()" class="btn btn-secondary btn-lg btn-block">-->
+                        <button type="button" class="btn btn-secondary" onclick="history.back()" name="Go back!">Назад</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+</body>
+</html>

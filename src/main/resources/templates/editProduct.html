@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Edit Product</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Current Product Details</h4>
+            <ul>
+                <li><strong>Name:</strong> <span th:text="${product.name}"></span></li>
+                <li><strong>Description:</strong> <span th:text="${product.description}"></span></li>
+                <li><strong>Price:</strong> <span th:text="${product.price}"></span></li>
+                <li><strong>Quantity:</strong> <span th:text="${product.quantity}"></span></li>
+                <li><strong>Available:</strong> <span th:text="${product.available}"></span></li>
+                <li><strong>Color:</strong> <span th:text="${product.color}"></span></li>
+                <li><strong>Material:</strong> <span th:text="${product.material}"></span></li>
+                <li><strong>Image:</strong> <span th:text="${product.imageUrl}"></span></li>
+                <li><strong>Manufacturer:</strong> <span th:text="${product.manufacturer}"></span></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h4>Edit Product</h4>
+            <form th:action="@{/shop/editProduct/update/{id}(id=${product.id})}" th:object="${product}" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter product name">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" th:field="*{price}" class="form-control" id="price" placeholder="Enter product price">
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="text" th:field="*{quantity}" class="form-control" id="quantity" placeholder="Enter product quantity">
+                </div>
+                <div class="form-group">
+                    <label for="available">Available</label>
+                    <select class="form-control" id="available" th:field="*{available}">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="Enter product color">
+                </div>
+                <div class="form-group">
+                    <label for="material">Material</label>
+                    <input type="text" th:field="*{material}" class="form-control" id="material" placeholder="Enter product material">
+                </div>
+                <div class="form-group">
+                    <label for="manufacturer">Manufacturer</label>
+                    <input type="text" th:field="*{manufacturer}" class="form-control" id="manufacturer" placeholder="Enter product manufacturer">
+                </div>
+                <div class="form-group">
+                    <label for="imageFile">Image</label>
+                    <input type="file" class="form-control-file" id="imageFile" name="imageFile" accept="image/*">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

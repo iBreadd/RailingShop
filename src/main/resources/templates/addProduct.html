@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавяне на продукт</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Добавяне на продукт</h1>
+<form th:action="@{/shop/addProduct}" th:object="${product}" method="post" enctype="multipart/form-data">
+    <div>
+        <label for="name">Име:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Името на продукта не може да бъде празно!</span>
+    </div>
+    <div>
+        <label for="description">Описание:</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+    </div>
+    <div>
+        <label for="price">Цена:</label>
+        <input type="number" id="price" th:field="*{price}" step="0.01" required>
+        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Цената не може да бъде нула и трябва да е по-голяма от 0.00!</span>
+    </div>
+    <div>
+        <label for="quantity">Количество:</label>
+        <input type="number" id="quantity" th:field="*{quantity}" required>
+        <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Количеството не може да бъде нула и трябва да е повече или равно на 1!</span>
+    </div>
+    <div>
+        <label for="available">Наличен:</label>
+        <input type="checkbox" id="available" th:field="*{available}">
+    </div>
+    <div>
+        <label for="color">Цвят:</label>
+        <select id="color" th:field="*{color}" required>
+            <option th:each="color : ${T(com.example.RailingShop.Enums.ProductColor).values()}" th:value="${color}" th:text="${color}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Цвета не може да бъде празен!</span>
+    </div>
+    <div>
+        <label for="material">Материал:</label>
+        <select id="material" th:field="*{material}" required>
+            <option th:each="material : ${T(com.example.RailingShop.Enums.ProductMaterial).values()}" th:value="${material}" th:text="${material}"></option>
+        </select>
+        <span th:if="${#fields.hasErrors('material')}" th:errors="*{material}">Материалът не може да бъде празен!</span>
+    </div>
+    <div>
+        <label for="imageFile">Изображение:</label>
+        <input type="file" id="imageFile" name="imageFile" accept="image/*">
+    </div>
+    <div>
+        <label for="manufacturer">Производител:</label>
+        <input type="text" id="manufacturer" th:field="*{manufacturer}" required>
+        <span th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}">Производителят не може да бъде празен!</span>
+    </div>
+    <div>
+        <button type="submit">Добави продукт</button>
+    </div>
+</form>
+</body>
+</html>
